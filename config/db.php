@@ -1,16 +1,23 @@
 <?php
+// Enable clear error reporting so we can spot syntax bugs instantly
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$host = "localhost";
-$user = "root";
-$password = "Siri@07";
-$database = "library_management";
+// Railway automatically feeds these dynamic variables to your server environment
+$servername = getenv('MYSQLHOST');
+$username   = getenv('MYSQLUSER');
+$password   = getenv('MYSQLPASSWORD');
+$dbname     = getenv('MYSQLDATABASE');
+$port       = getenv('MYSQLPORT');
 
-// Create connection
-$conn = mysqli_connect($host, $user, $password, $database);
+// Establish the connection including the required production network port
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+// Safely trap database connection faults without throwing a generic HTTP 500 error
+if ($conn->connect_error) {
+    die("Cloud Database connection failed: " . $conn->connect_error);
 }
 
+// Ensure the database handles your Unicode string characters smoothly (like email strings)
+$conn->set_charset("utf8mb4");
 ?>
