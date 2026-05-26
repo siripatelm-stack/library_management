@@ -74,7 +74,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <p>Select a portal below to sign in to your workspace.</p>
         
         <!-- Action Buttons linking directly to your project subdirectories -->
-        <a class="btn btn-admin" href="./admin/login.php">Admin Login Panel</a>
+        <a class="btn btn-admin" href="./admin/admin_login.php">Admin Login Panel</a>
         <a class="btn btn-student" href="./student/login.php">Student Login Panel</a>
     </div>
 
