@@ -5,12 +5,17 @@ require_once("../config/db.php");
 
 $message = "";
 
+// Check if connection exists
+if (!isset($conn) || !$conn) {
+    $message = "Database connection failed!";
+    $conn = null;
+}
 
 /* =========================
    ADMIN SIGNUP
 ========================= */
 
-if(isset($_POST['signup'])){
+if(isset($_POST['signup']) && $conn){
 
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
@@ -52,7 +57,7 @@ if(isset($_POST['signup'])){
    ADMIN LOGIN
 ========================= */
 
-if(isset($_POST['login'])){
+if(isset($_POST['login']) && $conn){
 
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
